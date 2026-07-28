@@ -3,7 +3,7 @@ using UnityEngine;
 public class CursorLock : MonoBehaviour
 {
     public static CursorLock Instance {get; private set;}
-    private void OnEnable(){
+    private void Awake(){
         Instance = this;
 
         BlockCursor();

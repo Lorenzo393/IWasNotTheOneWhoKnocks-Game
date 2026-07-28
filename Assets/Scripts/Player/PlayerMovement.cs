@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         rb.MoveRotation(yawRotation);
 
         Vector3 direction = yawRotation * new Vector3(moveInput.x, 0f, moveInput.y);
-        Vector3 targetVelocity = direction.normalized * moveSpeed;
+        Vector3 targetVelocity = direction * moveSpeed;
         targetVelocity.y = rb.linearVelocity.y;
 
         rb.linearVelocity = targetVelocity;
