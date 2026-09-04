@@ -6,9 +6,9 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance {get; private set;}
     private InputSystem_Actions inputActions;
-    private event EventHandler OnInteract;
+    public event EventHandler OnInteract;
     
-    private void OnEnable(){
+    private void Awake(){
         Instance = this;
         inputActions = new InputSystem_Actions();
         inputActions.UI.Disable();
