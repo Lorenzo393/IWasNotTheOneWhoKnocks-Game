@@ -2,8 +2,8 @@ using System;
 using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
-    public Transform InteractorSource;
-    [SerializeField] private float InteractRange = 4.0f;
+    private Transform InteractorSource;
+    [SerializeField] private float InteractRange = 2.0f;
 
     private void Start(){
         InputManager.Instance.OnInteract += InputManager_OnInteract;
