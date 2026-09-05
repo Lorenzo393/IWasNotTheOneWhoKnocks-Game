@@ -1,7 +1,8 @@
 using UnityEngine;
-public class DoorAnimation : MonoBehaviour
+
+public class ClosetDoorAnimation : MonoBehaviour
 {
-    private static readonly int IsOpenHash = Animator.StringToHash("isOpen");
+    private static readonly int IsActiveHash = Animator.StringToHash("isActive");
     [SerializeField] SimpleInteraction simpleInteraction;
     Animator animator;
     private void Awake(){
@@ -14,6 +15,7 @@ public class DoorAnimation : MonoBehaviour
         simpleInteraction.OnStateChange -= UpdateState;
     }
     private void UpdateState(bool isActive){
-        animator.SetBool(IsOpenHash, isActive);
+        Debug.Log(isActive);
+        animator.SetBool(IsActiveHash, isActive);
     }
 }
