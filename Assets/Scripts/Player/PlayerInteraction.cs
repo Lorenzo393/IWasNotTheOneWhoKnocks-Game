@@ -3,7 +3,7 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     private Transform InteractorSource;
-    [SerializeField] private float InteractRange = 2.0f;
+    [SerializeField] private float InteractRange = 3.0f;
 
     private void Start(){
         InputManager.Instance.OnInteract += InputManager_OnInteract;

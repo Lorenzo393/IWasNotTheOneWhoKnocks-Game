@@ -1,32 +1,45 @@
 using UnityEngine;
 using Unity.Cinemachine;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private CinemachinePanTilt cameraPanTilt;
+    [SerializeField] private float gravity = -9.81f;
+    [SerializeField] private float moveSpeed = 7f;
+    private CharacterController characterController;
 
-    private Rigidbody rb;
-    private Vector2 moveInput;
+    private Vector3 velocity;
 
     private void Awake(){
-        rb = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
+    }
+    private void Update(){
+        Move();
+        ApplyGravity();
     }
 
-    private void FixedUpdate()
-    {
-        moveInput = InputManager.Instance.GetMovementVector2Normalized();
+    private void Move(){
+        Vector2 input = InputManager.Instance.GetMovementVector2Normalized();
 
-        float panAngle = cameraPanTilt.PanAxis.Value;
-        Quaternion yawRotation = Quaternion.Euler(0f, panAngle, 0f);
+        Vector3 forward = cameraPanTilt.transform.forward;
+        Vector3 right = cameraPanTilt.transform.right;
 
-        rb.MoveRotation(yawRotation);
+        forward.y = 0f;
+        right.y = 0f;
 
-        Vector3 direction = yawRotation * new Vector3(moveInput.x, 0f, moveInput.y);
-        Vector3 targetVelocity = direction * moveSpeed;
-        targetVelocity.y = rb.linearVelocity.y;
+        forward.Normalize();
+        right.Normalize();
 
-        rb.linearVelocity = targetVelocity;
+        Vector3 moveDirection =forward * input.y + right * input.x;
+        characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
+    }
+
+    private void ApplyGravity(){
+        if (characterController.isGrounded && velocity.y < 0f)
+            velocity.y = -2f;
+    
+        velocity.y += gravity * Time.deltaTime;
+        characterController.Move(velocity * Time.deltaTime);
     }
 }
