@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class ClosetDoorAnimation : MonoBehaviour
 {
     private static readonly int IsActiveHash = Animator.StringToHash("isActive");

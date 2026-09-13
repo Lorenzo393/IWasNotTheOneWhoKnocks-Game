@@ -15,6 +15,6 @@ public class SwitchInteraction : MonoBehaviour
         simpleInteraction.OnStateChange -= UpdateState;
     }
     private void UpdateState(bool isActive){
-        Debug.Log(isActive);
+        // Debug.Log(isActive);
     }
 }
